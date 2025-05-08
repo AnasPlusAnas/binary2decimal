@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+import { Tabs } from 'expo-router';
 
 import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
 import { Octicons } from '@expo/vector-icons';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { StatusBar } from 'expo-status-bar';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -18,45 +17,51 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-  useEffect(() => {
-    // current color scheme
-    console.log('Current color scheme:', colorScheme);
-  })
-
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: true,
-        headerBackgroundContainerStyle: {
-          backgroundColor: Colors[colorScheme ?? 'light'].card,
-        },
-        headerTitleStyle: {
-          color: Colors[colorScheme ?? 'light'].primary,
-          fontFamily: 'OrbitronBold',
-          fontSize: hp('3.0%'),
-        },
-        tabBarLabelStyle: {
-          fontSize: hp('1.4%'),
-          fontFamily: 'OrbitronBold',
-        },
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].primary,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Converter',
-          headerTitle: 'Bin2Dec',
-          tabBarIcon: ({ color }) => <Octicons name="file-binary" color={color} size={20} />,
-        }}
-      />
-      <Tabs.Screen
-        name="history"
-        options={{
-          title: 'History',
-          tabBarIcon: ({ color }) => <TabBarIcon name="clipboard" color={color} size={20} />,
-        }}
-      />
-    </Tabs>
+    <>
+      <StatusBar style='light' />
+      <Tabs
+        screenOptions={{
+          headerShown: true,
+          headerBackgroundContainerStyle: {
+            backgroundColor: Colors.dark.card,
+          },
+          headerStyle: {
+            backgroundColor: Colors.dark.card,
+            borderBottomWidth: 0,
+          },
+          tabBarStyle: {
+            backgroundColor: Colors.dark.card,
+            borderTopWidth: 0,
+            height: hp('8%'),
+          },
+          headerTitleStyle: {
+            color: Colors.dark.primary,
+            fontFamily: 'OrbitronBold',
+            fontSize: hp('3.0%'),
+          },
+          tabBarLabelStyle: {
+            fontSize: hp('1.4%'),
+            fontFamily: 'OrbitronBold',
+          },
+          tabBarActiveTintColor: Colors.dark.primary,
+        }}>
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: 'Converter',
+            headerTitle: 'Bin2Dec',
+            tabBarIcon: ({ color }) => <Octicons name="file-binary" color={color} size={20} />,
+          }}
+        />
+        <Tabs.Screen
+          name="history"
+          options={{
+            title: 'History',
+            tabBarIcon: ({ color }) => <TabBarIcon name="clipboard" color={color} size={20} />,
+          }}
+        />
+      </Tabs>
+    </>
   );
 }
