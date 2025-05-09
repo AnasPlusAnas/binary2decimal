@@ -213,6 +213,7 @@ export default function HomeScreen() {
           <Text style={{ color: Colors.dark.foreground, fontFamily: "JetbrainsMono", fontSize: hp('1.4%'), marginTop: 5 }}>Our converter instantly calculates this conversion for you as you type, supporting binary numbers up to 8 digits (maximum decimal value: 255).</Text>
         </View>
       </View >
+
       {/* CONFIRMATION MODAL */}
       <Modal
         animationType="fade"

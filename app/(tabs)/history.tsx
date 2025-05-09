@@ -4,8 +4,11 @@ import { useConversionStore } from '@/store/useConversionStore';
 import Colors from '@/constants/Colors';
 import { FontAwesome } from '@expo/vector-icons';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import LottieView from 'lottie-react-native';
+import { useRef } from 'react';
 
 export default function HistoryScreen() {
+  const animation = useRef<LottieView>(null);
   const conversions = useConversionStore((state) => state.conversions);
   const deleteConversion = useConversionStore((state) => state.deleteConversion);
 
@@ -13,8 +16,22 @@ export default function HistoryScreen() {
     <View style={[{ backgroundColor: Colors.dark.background }, styles.container]}>
       <Text style={[{ color: Colors.dark.foreground, alignSelf: 'center' }, styles.title]}>Saved Conversions</Text>
       <FlatList
+        scrollEnabled={conversions.length > 0}
         showsVerticalScrollIndicator={false}
         data={conversions}
+        ListEmptyComponent={() => (
+          <View style={styles.animationContainer}>
+            <LottieView
+              autoPlay
+              ref={animation}
+              style={{
+                width: 200,
+                height: 200,
+              }}
+              source={require('../../assets/images/emptyAnimation.json')}
+            />
+          </View>
+        )}
         renderItem={({ item }) => (
           <View style={[{ backgroundColor: Colors.dark.card }, styles.historyItem]}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent', alignItems: 'center' }}>
@@ -62,5 +79,11 @@ const styles = StyleSheet.create({
   historyItem: {
     padding: 16,
     borderRadius: 8,
+  },
+  animationContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: hp('60%'),
+    flex: 1,
   },
 });
