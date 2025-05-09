@@ -15,7 +15,7 @@ A simple, modern React Native app to convert binary numbers to decimal, save con
 ---
 
 ## Screenshots
-![Home Screen](./assets/screenshots/screenshot1.png)
+<img src="./assets/screenshots/screenshot1.png" alt="Home Screen" width="300"/>
 ---
 
 ## Getting Started
